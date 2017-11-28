@@ -35,87 +35,86 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-//        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
-//        requestWindowFeature(Window.FEATURE_NO_TITLE);
-
         setContentView(R.layout.activity_main);
 
-//        mTextureView = (TextureView) findViewById(R.id.textureView);
+        //全屏无状态栏
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
+
+        mTextureView = (TextureView) findViewById(R.id.textureView);
     }
 
-//    @Override
-//    protected void onResume() {
-//        super.onResume();
-//
-//        startCameraThread();
-//
-//        if (!mTextureView.isAvailable()) {
-//            mTextureView.setSurfaceTextureListener(mTextureListener);
-//        } else {
-//            startPreview();
-//        }
-//    }
-//
-//    private TextureView.SurfaceTextureListener mTextureListener = new TextureView.SurfaceTextureListener() {
-//        @Override
-//        public void onSurfaceTextureAvailable(SurfaceTexture surfaceTexture, int i, int i1) {
-//
-//        }
-//
-//        @Override
-//        public void onSurfaceTextureSizeChanged(SurfaceTexture surfaceTexture, int i, int i1) {
-//
-//        }
-//
-//        @Override
-//        public boolean onSurfaceTextureDestroyed(SurfaceTexture surfaceTexture) {
-//            return false;
-//        }
-//
-//        @Override
-//        public void onSurfaceTextureUpdated(SurfaceTexture surfaceTexture) {
-//
-//        }
-//    };
-//
-//    private void startPreview() {
-//        SurfaceTexture mSurfaceTexture = mTextureView.getSurfaceTexture();
-//        mSurfaceTexture.setDefaultBufferSize(mPreviewSize.getWidth(), mPreviewSize.getHeight());
-//        Surface previewSurface = new Surface(mSurfaceTexture);
-//    }
-//
-//    private void startCameraThread() {
-//        mCameraThread = new HandlerThread( "CameraThread");
-//        mCameraThread.start();
-//        mCameraHandler = new Handler(mCameraThread.getLooper());
-//
-//    }
-//
-//    @Override
-//    protected void onPause() {
-//        super.onPause();
-//
-//        if (mCameraCaptureSession != null) {
-//            mCameraCaptureSession.close();
-//            mCameraCaptureSession = null;
-//        }
-//
-//        if (mCameraDevice != null) {
-//            mCameraDevice.close();
-//            mCameraDevice = null;
-//        }
-//
-//        if (mImageReader != null) {
-//            mImageReader.close();
-//            mImageReader = null;
-//        }
-//    }
-//
-//    public void takePicture(View view) {
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        startCameraThread();
+
+        if (!mTextureView.isAvailable()) {
+            mTextureView.setSurfaceTextureListener(mTextureListener);
+        } else {
+            startPreview();
+        }
+    }
+
+    private TextureView.SurfaceTextureListener mTextureListener = new TextureView.SurfaceTextureListener() {
+        @Override
+        public void onSurfaceTextureAvailable(SurfaceTexture surfaceTexture, int i, int i1) {
+
+        }
+
+        @Override
+        public void onSurfaceTextureSizeChanged(SurfaceTexture surfaceTexture, int i, int i1) {
+
+        }
+
+        @Override
+        public boolean onSurfaceTextureDestroyed(SurfaceTexture surfaceTexture) {
+            return false;
+        }
+
+        @Override
+        public void onSurfaceTextureUpdated(SurfaceTexture surfaceTexture) {
+
+        }
+    };
+
+    private void startPreview() {
+        SurfaceTexture mSurfaceTexture = mTextureView.getSurfaceTexture();
+        mSurfaceTexture.setDefaultBufferSize(mPreviewSize.getWidth(), mPreviewSize.getHeight());
+        Surface previewSurface = new Surface(mSurfaceTexture);
+    }
+
+    private void startCameraThread() {
+        mCameraThread = new HandlerThread( "CameraThread");
+        mCameraThread.start();
+        mCameraHandler = new Handler(mCameraThread.getLooper());
+
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+
+        if (mCameraCaptureSession != null) {
+            mCameraCaptureSession.close();
+            mCameraCaptureSession = null;
+        }
+
+        if (mCameraDevice != null) {
+            mCameraDevice.close();
+            mCameraDevice = null;
+        }
+
+        if (mImageReader != null) {
+            mImageReader.close();
+            mImageReader = null;
+        }
+    }
+
+    public void takePicture(View view) {
 //        lockFocus();
-//    }
-//
+    }
+
 //    private void lockFocus() {
 //        try {
 //            mCaptureRequestBuilder.set(CaptureRequest.CONTROL_AF_TRIGGER, CameraMetadata.CONTROL_AF_TRIGGER_CANCEL);
